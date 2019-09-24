@@ -17,5 +17,4 @@ public class Webcam : MonoBehaviour
         rawImage.material.mainTexture = backCam;
         if(!backCam.isPlaying) backCam.Play();    
     }
-
 }
