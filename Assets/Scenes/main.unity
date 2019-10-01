@@ -890,7 +890,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98395e13ea8c04fce8ee406a2e2d7b34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  socket_adress: ws://echo.websocket.org
+  socket_adress: ws://192.168.1.103:4649/Chat
 --- !u!1 &1845923528
 GameObject:
   m_ObjectHideFlags: 0
