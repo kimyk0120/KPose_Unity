@@ -73,9 +73,10 @@ public class WebSocket_Control : MonoBehaviour {
     {
         get
         {
+            Debug.Log("while Image Send");
             while (true)
             {
-                Debug.Log("Image Send");                
+                
                 byte[] b = wc.GetImgBytes();
                 //ws.Send(Encoding.UTF8.GetBytes("Image Send"));
                 ws.Send(b);
