@@ -587,6 +587,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   socket_adress: 
+  wc: {fileID: 0}
 --- !u!4 &1112455477
 Transform:
   m_ObjectHideFlags: 0
@@ -891,6 +892,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   socket_adress: ws://192.168.1.103:4649/Chat
+  wc: {fileID: 436043070}
 --- !u!1 &1845923528
 GameObject:
   m_ObjectHideFlags: 0

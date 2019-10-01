@@ -8,8 +8,7 @@ using System.Text;
 public class Webcam : MonoBehaviour
 {    
     static WebCamTexture webCamTexture;
-    public RawImage rawImage;    
-    int _CaptureCounter = 0;
+    public RawImage rawImage;        
 
     private byte[] image_bytes;
 
