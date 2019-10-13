@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 using System.IO;
-
+using LitJson;
 
 // Use plugin namespace
 using HybridWebSocket;
@@ -79,9 +79,26 @@ public class WebSocket_Control : MonoBehaviour {
                 
                 byte[] b = wc.GetImgBytes();
                 //ws.Send(Encoding.UTF8.GetBytes("Image Send"));
-                ws.Send(b);
+                
+                ReqJson item = new ReqJson("image", Encoding.Default.GetString(b));
+                JsonData jsonData = JsonMapper.ToJson(item);
+                File.WriteAllText(Application.dataPath + "/Resources/itemData.json", jsonData.ToString());
+                
+                ws.Send(Encoding.UTF8.GetBytes(jsonData.ToString()));
                 yield return new WaitForSeconds(0.01f);
             }
         }//.ImageSend
     }
 }//.class
+
+
+public class ReqJson
+{
+    public string Image;
+    public string Name;
+
+    public ReqJson(string name , string image) {
+        Name = name;
+        Image = image;        
+    }
+}
