@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
+using WebSocketSharp.Server;
 
 public class IKSetting : MonoBehaviour
 {
@@ -21,9 +22,12 @@ public class IKSetting : MonoBehaviour
     int[, ] BoneJoint = new int[, ] { { 0, 2 }, { 2, 3 }, { 0, 5 }, { 5, 6 }, { 0, 9 }, { 9, 10 }, { 9, 11 }, { 11, 12 }, { 12, 13 }, { 9, 14 }, { 14, 15 }, { 15, 16 } };
     int[, ] NormalizeJoint = new int[, ] { { 0, 1 }, { 1, 2 }, { 0, 3 }, { 3, 4 }, { 0, 5 }, { 5, 6 }, { 5, 7 }, { 7, 8 }, { 8, 9 }, { 5, 10 }, { 10, 11 }, { 11, 12 } };
     int NowFrame = 0;
+    public WebSocket_Control WebSocketControl;
+    
     void Start()
     {
-        PointUpdate();
+//        PointUpdate();
+        PointUpdate_from_msg();
     }
     void Update()
     {
@@ -31,7 +35,8 @@ public class IKSetting : MonoBehaviour
         if (Timer > (1 / FrameRate))
         {
             Timer = 0;
-            PointUpdate();
+//            PointUpdate();
+            PointUpdate_from_msg();
         }
         if (!FullbodyIK)
         {
@@ -42,6 +47,37 @@ public class IKSetting : MonoBehaviour
             IKSet();
         }
     }
+
+    private void PointUpdate_from_msg()
+    {
+        var msg = WebSocketControl.GetResturnMsg();
+        if (msg!=null&&!msg.Equals(""))
+        {
+            Debug.Log("WebSocketControl.returnMsg : " + WebSocketControl.GetResturnMsg());
+            try
+            {
+                string[] axis = msg.Split(']');
+                float[] x = axis[0].Replace("[", "").Replace(Environment.NewLine, "").Split(' ').Where(s => s != "").Select(f => float.Parse(f)).ToArray();
+                float[] y = axis[2].Replace("[", "").Replace(Environment.NewLine, "").Split(' ').Where(s => s != "").Select(f => float.Parse(f)).ToArray();
+                float[] z = axis[1].Replace("[", "").Replace(Environment.NewLine, "").Split(' ').Where(s => s != "").Select(f => float.Parse(f)).ToArray();
+                for (int i = 0; i < 17; i++)
+                {
+                    points[i] = new Vector3(-x[i], y[i], -z[i]);
+                }
+
+                for (int i = 0; i < 12; i++)
+                {
+                    NormalizeBone[i] = (points[BoneJoint[i, 1]] - points[BoneJoint[i, 0]]).normalized;
+                }
+            }
+            catch (FormatException e)
+            {
+                System.Console.WriteLine(e);
+                throw;
+            }
+        }//.if
+    }//.PointUpdate_from_msg
+
     void PointUpdate()
     {
         StreamReader fi = null;
@@ -66,7 +102,8 @@ public class IKSetting : MonoBehaviour
                 NormalizeBone[i] = (points[BoneJoint[i, 1]] - points[BoneJoint[i, 0]]).normalized;
             }
         }
-    }
+    }//.PointUpdate
+    
     void IKFind()
     {
         FullbodyIK = GameObject.Find("FullBodyIK");
