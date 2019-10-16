@@ -16,9 +16,9 @@ public class WebSocket_Control : MonoBehaviour
 //    public string socket_adress = "ws://192.168.1.103:4649/Chat";
     public string socket_adress;
     private WebSocket ws;
-    public Webcam wc;
+    public wc2 wc;
     private string returnMsg;
-
+    
     public string GetResturnMsg()
     {
         return this.returnMsg;
@@ -137,7 +137,8 @@ public class WebSocket_Control : MonoBehaviour
                 
 //                ws.Send(Encoding.UTF8.GetBytes(jsonData.ToString()));
                 ws.Send(b);
-                yield return new WaitForSeconds(3);
+                Debug.Log("send");
+                yield return new WaitForSeconds(0.3f);
             }
         }//.ImageSend
     }

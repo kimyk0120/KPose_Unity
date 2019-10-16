@@ -19,7 +19,7 @@ public class Webcam : MonoBehaviour
     void Start()
     {
         if(webCamTexture == null)
-            webCamTexture = new WebCamTexture();        
+            webCamTexture = new WebCamTexture(432,368);        
         rawImage.texture = webCamTexture;
         rawImage.material.mainTexture = webCamTexture;
         if(!webCamTexture.isPlaying) webCamTexture.Play();

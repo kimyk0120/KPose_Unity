@@ -2192,6 +2192,7 @@
             <e p="WebSocket.cs" t="Include" />
             <e p="WebSocketDemo.cs" t="Include" />
           </e>
+          <e p="wc2.cs" t="Include" />
           <e p="Webcam.cs" t="Include" />
           <e p="WebSocket_Control.cs" t="Include" />
         </e>

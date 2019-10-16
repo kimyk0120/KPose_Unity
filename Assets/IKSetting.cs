@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 using WebSocketSharp.Server;
 
 public class IKSetting : MonoBehaviour
@@ -48,32 +49,24 @@ public class IKSetting : MonoBehaviour
         }
     }
 
-    private void PointUpdate_from_msg()
+    void PointUpdate_from_msg()
     {
         var msg = WebSocketControl.GetResturnMsg();
         if (msg!=null&&!msg.Equals(""))
         {
             Debug.Log("WebSocketControl.returnMsg : " + WebSocketControl.GetResturnMsg());
-            try
+            string[] axis = msg.Split(']');
+            float[] x = axis[0].Replace("[", "").Replace(Environment.NewLine, "").Split(' ').Where(s => s != "").Select(f => float.Parse(f)).ToArray();
+            float[] y = axis[2].Replace("[", "").Replace(Environment.NewLine, "").Split(' ').Where(s => s != "").Select(f => float.Parse(f)).ToArray();
+            float[] z = axis[1].Replace("[", "").Replace(Environment.NewLine, "").Split(' ').Where(s => s != "").Select(f => float.Parse(f)).ToArray();
+            for (int i = 0; i < 17; i++)
             {
-                string[] axis = msg.Split(']');
-                float[] x = axis[0].Replace("[", "").Replace(Environment.NewLine, "").Split(' ').Where(s => s != "").Select(f => float.Parse(f)).ToArray();
-                float[] y = axis[2].Replace("[", "").Replace(Environment.NewLine, "").Split(' ').Where(s => s != "").Select(f => float.Parse(f)).ToArray();
-                float[] z = axis[1].Replace("[", "").Replace(Environment.NewLine, "").Split(' ').Where(s => s != "").Select(f => float.Parse(f)).ToArray();
-                for (int i = 0; i < 17; i++)
-                {
-                    points[i] = new Vector3(-x[i], y[i], -z[i]);
-                }
-
-                for (int i = 0; i < 12; i++)
-                {
-                    NormalizeBone[i] = (points[BoneJoint[i, 1]] - points[BoneJoint[i, 0]]).normalized;
-                }
+                points[i] = new Vector3(-x[i], y[i], -z[i]);
             }
-            catch (FormatException e)
+
+            for (int i = 0; i < 12; i++)
             {
-                System.Console.WriteLine(e);
-                throw;
+                NormalizeBone[i] = (points[BoneJoint[i, 1]] - points[BoneJoint[i, 0]]).normalized;
             }
         }//.if
     }//.PointUpdate_from_msg
