@@ -9,7 +9,7 @@ using System.Text;
 public class wc2 : MonoBehaviour
 {
     private WebCamTexture web;
-    
+    public RawImage rawimage;
     private byte[] image_bytes;
 
     public byte[] GetImgBytes() { return image_bytes; }
@@ -18,8 +18,13 @@ public class wc2 : MonoBehaviour
     
     void Start()
     {
-        web = new WebCamTexture(1280,720,60);
-        GetComponent<MeshRenderer>().material.mainTexture = web;
+//        web = new WebCamTexture(1280,720,60);
+//        GetComponent<MeshRenderer>().material.mainTexture = web;
+//        web.Play();
+//        RectTransform rectTransform = gameObject.GetComponent<RectTransform>();
+        web = new WebCamTexture(640,480,30);
+        rawimage.texture = web;
+//        rawimage.material.mainTexture = webcamTexture;
         web.Play();
     }
 

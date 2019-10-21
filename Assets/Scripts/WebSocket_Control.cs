@@ -129,13 +129,15 @@ public class WebSocket_Control : MonoBehaviour
             {
                 
                 byte[] b = wc.GetImgBytes();
+                
                 //ws.Send(Encoding.UTF8.GetBytes("Image Send"));
                 
-                ReqJson item = new ReqJson("image", Encoding.UTF8.GetString(b));
-                JsonData jsonData = JsonMapper.ToJson(item);
+//                ReqJson item = new ReqJson("image", Encoding.UTF8.GetString(b));
+//                JsonData jsonData = JsonMapper.ToJson(item);
 //                File.WriteAllText(Application.dataPath + "/Resources/itemData.json", jsonData.ToString());
-                
 //                ws.Send(Encoding.UTF8.GetBytes(jsonData.ToString()));
+//                System.Convert.ToBase64String(b);
+                
                 ws.Send(b);
                 Debug.Log("send");
                 yield return new WaitForSeconds(0.3f);
