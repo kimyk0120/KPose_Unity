@@ -1551,6 +1551,7 @@
         </e>
         <e p="datas" t="Include">
           <e p="3d_data0.txt" t="Include" />
+          <e p="3d_data1.txt" t="Include" />
           <e p="copy" t="Include">
             <e p="3d_data0.txt" t="Include" />
             <e p="3d_data1.txt" t="Include" />
@@ -2192,6 +2193,7 @@
             <e p="WebSocket.cs" t="Include" />
             <e p="WebSocketDemo.cs" t="Include" />
           </e>
+          <e p="uiscript.cs" t="Include" />
           <e p="wc2.cs" t="Include" />
           <e p="WebSocket_Control.cs" t="Include" />
         </e>

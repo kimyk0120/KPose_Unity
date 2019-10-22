@@ -40,7 +40,7 @@ public class BoneController : MonoBehaviour
 
     void Update()
     {
-        PointUpdateByTime();
+//        PointUpdateByTime();
         SetBoneRot();
     }
     void GetBones()
@@ -91,9 +91,11 @@ public class BoneController : MonoBehaviour
     }
     void PointUpdate()
     {
+        StreamReader fi;
         if (NowFrame < Data_Size)
         {
-            StreamReader fi = new StreamReader(Application.dataPath + Data_Path + File_Name + NowFrame.ToString() + ".txt");
+            fi = new StreamReader(Application.dataPath + Data_Path + File_Name+ ".txt");
+            
             NowFrame++;
             string all = fi.ReadToEnd();
             if (all != "0")

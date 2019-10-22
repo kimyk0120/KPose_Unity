@@ -8,6 +8,7 @@ using LitJson;
 
 // Use plugin namespace
 using HybridWebSocket;
+using UnityEngine.UI;
 
 public class WebSocket_Control : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class WebSocket_Control : MonoBehaviour
     private WebSocket ws;
     public wc2 wc;
     private string returnMsg;
+    private UiScript uiScript = new UiScript();
     
     public string GetResturnMsg()
     {
@@ -97,11 +99,34 @@ public class WebSocket_Control : MonoBehaviour
     public void StartBtnOn(){
         Debug.Log("StartBtnOn");        
 //        ws.Send(Encoding.UTF8.GetBytes("Hello from Unity 3D!"));
+//        ImageSendOne();
         StartCoroutine(ImageSend);
+        
     }
 
     public void JoinBtnOn(){
         Debug.Log("JoinBtnOn");
+        
+//        string filePath = Application.dataPath + "/images/full_body_img2.jpg";
+//        Texture2D tex = null;
+//        byte[] fileData;
+ 
+//        if (File.Exists(filePath))     {
+//            Debug.Log("File.Exists");
+//            fileData = File.ReadAllBytes(filePath);
+//            tex = new Texture2D(2, 2);
+//            tex.LoadImage(fileData); //..this will auto-resize the texture dimensions.
+//            byte[] b = tex.EncodeToPNG();
+//            ws.Send(b);
+//        }
+    }
+
+    public void StopBtnOn()
+    {
+        Debug.Log("StopBtnOn");
+        StopCoroutine(ImageSend);
+        uiScript.ColorChg_white();
+        ws.Close();
     }
     
     private void weOnMessage(){
@@ -127,24 +152,34 @@ public class WebSocket_Control : MonoBehaviour
             Debug.Log("while Image Send");
             while (true)
             {
-                
                 byte[] b = wc.GetImgBytes();
-                
-                //ws.Send(Encoding.UTF8.GetBytes("Image Send"));
                 
 //                ReqJson item = new ReqJson("image", Encoding.UTF8.GetString(b));
 //                JsonData jsonData = JsonMapper.ToJson(item);
 //                File.WriteAllText(Application.dataPath + "/Resources/itemData.json", jsonData.ToString());
 //                ws.Send(Encoding.UTF8.GetBytes(jsonData.ToString()));
 //                System.Convert.ToBase64String(b);
-                
+
                 ws.Send(b);
                 Debug.Log("send");
                 yield return new WaitForSeconds(0.3f);
             }
         }//.ImageSend
     }
+    
+    
+    void ImageSendOne(){
+        byte[] b = wc.GetImgBytes();
+        ws.Send(b);
+        Debug.Log("send one");
+    }
+
+   
+    
+
 }//.class
+
+    
 
 
 public class ReqJson

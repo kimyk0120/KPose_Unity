@@ -31,20 +31,29 @@ public class wc2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        SaveImage();        
+//        SaveImage();        
     }
-    
+
+    void LateUpdate()
+    {
+        SaveImage();
+    }
     
     public void SaveImage(){
         Texture2D texture = new Texture2D(web.width,web.height, TextureFormat.ARGB32, false);
         texture.SetPixels(web.GetPixels());
         texture.Apply();
         byte[] bytes = texture.EncodeToPNG();
-
+        
+//        File.WriteAllBytes(Application.dataPath+"/images/test_file_"+Time.time+".png", bytes);
         //Debug.Log(Encoding.Default.GetString(bytes));
         
-        this.SetImageBytes(bytes);        
+        this.SetImageBytes(bytes);
+        
+        
     }
+
+    
     
 }//.class
 

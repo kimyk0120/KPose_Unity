@@ -27,8 +27,8 @@ public class IKSetting : MonoBehaviour
     
     void Start()
     {
-//        PointUpdate();
-        PointUpdate_from_msg();
+        PointUpdate();
+//        PointUpdate_from_msg();
     }
     void Update()
     {
@@ -49,9 +49,24 @@ public class IKSetting : MonoBehaviour
         }
     }
 
+    private string oldMsg = "";
+    private string newMsg = "";
     void PointUpdate_from_msg()
     {
         var msg = WebSocketControl.GetResturnMsg();
+        if (msg == null || msg.Equals("")) msg = "";
+        if (oldMsg == null || oldMsg.Equals("")) oldMsg = msg;
+        if (newMsg == null || newMsg.Equals("")) newMsg = msg;
+        
+        newMsg = msg;
+        
+        if (oldMsg.Equals(newMsg)){
+            msg = "";
+        }
+        else{
+            oldMsg = newMsg;
+        }
+
         if (msg!=null&&!msg.Equals(""))
         {
             Debug.Log("WebSocketControl.returnMsg : " + WebSocketControl.GetResturnMsg());
@@ -78,7 +93,7 @@ public class IKSetting : MonoBehaviour
         {
 //            Debug.Log("test : " +NowFrame.ToString());
 //            fi = new StreamReader(Application.dataPath + Data_Path + File_Name + NowFrame.ToString() + ".txt");
-            fi = new StreamReader(Application.dataPath + Data_Path + File_Name + "0" + ".txt");
+            fi = new StreamReader(Application.dataPath + Data_Path + File_Name + ".txt");
             NowFrame++;
             string all = fi.ReadToEnd();
             string[] axis = all.Split(']');
