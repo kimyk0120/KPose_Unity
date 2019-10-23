@@ -9,7 +9,7 @@ public class UiScript : MonoBehaviour
     public void ColorChg(string object_nm)
     {
         GameObject a = GameObject.Find(object_nm);
-        Debug.Log(a.gameObject.name);
+//        Debug.Log(a.gameObject.name);
         a.GetComponent<Image>().color = Color.grey;
     }
     

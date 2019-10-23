@@ -19,8 +19,23 @@ public class WebSocket_Control : MonoBehaviour
     private WebSocket ws;
     public wc2 wc;
     private string returnMsg;
-    private UiScript uiScript = new UiScript();
+    private UiScript uiScript;
+    private int cnntStat;
     
+    void Awake ()
+    {
+        uiScript = new UiScript();
+        cnntStat = 0;
+    }
+    
+    void Update()
+    {
+        if (cnntStat == 1)
+        {
+            StopBtnOn();
+        }
+    }
+
     public string GetResturnMsg()
     {
         return this.returnMsg;
@@ -48,60 +63,34 @@ public class WebSocket_Control : MonoBehaviour
             Debug.Log("WS error: " + errMsg);
             //ws.Close();
         };
-
+        
+        
         // Add OnClose event listener
         ws.OnClose += (WebSocketCloseCode code) =>
         {
             Debug.Log("WS closed with code: " + code.ToString());
+            cnntStat = 1;
         };
-
+        
+        
         // Connect to the server
         ws.Connect();
     }
 
-    // Use this for initialization
-    void Start () {
-//        // Create WebSocket instance
-//        ws = WebSocketFactory.CreateInstance(socket_adress);
-//        
-//        // Add OnOpen event listener
-//        ws.OnOpen += () =>
-//        {
-//            Debug.Log("WS connected!");
-//            Debug.Log("WS state: " + ws.GetState().ToString());            
-//            //ws.Send(Encoding.UTF8.GetBytes("Hello from Unity 3D!"));
-//        };                
-//
-//        // Add OnMessage event listener
-//        weOnMessage();
-//
-//        // Add OnError event listener
-//        ws.OnError += (string errMsg) =>
-//        {
-//            Debug.Log("WS error: " + errMsg);
-//        };
-//
-//        // Add OnClose event listener
-//        ws.OnClose += (WebSocketCloseCode code) =>
-//        {
-//            Debug.Log("WS closed with code: " + code.ToString());
-//        };
-//
-//        // Connect to the server
-//        ws.Connect();
-    }
-
-//    private void Update()
-//    {
-//        ImageSend();
-//    }
 
     public void StartBtnOn(){
         Debug.Log("StartBtnOn");        
 //        ws.Send(Encoding.UTF8.GetBytes("Hello from Unity 3D!"));
 //        ImageSendOne();
-        StartCoroutine(ImageSend);
-        
+        try
+        {
+            StartCoroutine(ImageSend);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError(e);
+            cnntStat = 1;
+        }
     }
 
     public void JoinBtnOn(){
@@ -123,9 +112,10 @@ public class WebSocket_Control : MonoBehaviour
 
     public void StopBtnOn()
     {
-        Debug.Log("StopBtnOn");
+//        Debug.Log("StopBtnOn");
         StopCoroutine(ImageSend);
         uiScript.ColorChg_white();
+        cnntStat = 0;
         ws.Close();
     }
     
@@ -149,7 +139,6 @@ public class WebSocket_Control : MonoBehaviour
     {
         get
         {
-            Debug.Log("while Image Send");
             while (true)
             {
                 byte[] b = wc.GetImgBytes();
@@ -159,9 +148,16 @@ public class WebSocket_Control : MonoBehaviour
 //                File.WriteAllText(Application.dataPath + "/Resources/itemData.json", jsonData.ToString());
 //                ws.Send(Encoding.UTF8.GetBytes(jsonData.ToString()));
 //                System.Convert.ToBase64String(b);
-
-                ws.Send(b);
-                Debug.Log("send");
+                try
+                {
+                    Debug.Log("send");
+                    ws.Send(b);
+                }
+                catch (Exception e)
+                {
+                    cnntStat = 1;
+                    throw;
+                }
                 yield return new WaitForSeconds(0.3f);
             }
         }//.ImageSend
