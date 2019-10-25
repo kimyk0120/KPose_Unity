@@ -5610,7 +5610,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd31b743661d24fe9ad3efcbcc35e4b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FrameRate: 30
+  FrameRate: 10
   BoneList: []
   Data_Path: /datas/
   File_Name: 3d_data0
