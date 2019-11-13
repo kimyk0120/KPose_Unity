@@ -4,6 +4,19 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering;
+using UnityEngine.UI;
+using WebSocketSharp.Server;
+
+//    허리 0
+//    오른발 1 ~ 3
+//    4-6 왼발
+//    7 척추
+//    8 가슴
+//    9 목 
+//    10 헤드
+//    11 ~ 13 왼팔
+//    14 ~ 16 오른팔
 public class BoneController : MonoBehaviour
 {
     [SerializeField] Animator animator;
@@ -32,6 +45,9 @@ public class BoneController : MonoBehaviour
     { { 0, 2 }, { 2, 3 }, { 0, 5 }, { 5, 6 }, { 0, 7 }, { 7, 8 }, { 8, 9 }, { 9, 10 }, { 9, 12 }, { 12, 13 }, { 9, 15 }, { 15, 16 }
     };
     int NowFrame = 0;
+    
+    public WebSocket_Control WebSocketControl;
+    
     void Start()
     {
         GetBones();
@@ -40,7 +56,7 @@ public class BoneController : MonoBehaviour
 
     void Update()
     {
-//        PointUpdateByTime();
+        PointUpdateByTime();
         SetBoneRot();
     }
     void GetBones()
@@ -119,13 +135,52 @@ public class BoneController : MonoBehaviour
             }
         }
     }
+    
+    private string oldMsg = "";
+    private string newMsg = "";
+    void PointUpdate_from_msg()
+    {
+        var msg = WebSocketControl.GetResturnMsg();
+        if (msg == null || msg.Equals("")) msg = "";
+        if (oldMsg == null || oldMsg.Equals("")) oldMsg = msg;
+        if (newMsg == null || newMsg.Equals("")) newMsg = msg;
+        
+        newMsg = msg;
+        
+        if (oldMsg.Equals(newMsg)){
+            msg = "";
+        }
+        else{
+            oldMsg = newMsg;
+        }
+
+        if (msg!=null&&!msg.Equals(""))
+        {
+            Debug.Log("WebSocketControl.returnMsg : " + WebSocketControl.GetResturnMsg());
+            string[] axis = msg.Split(']');
+            float[] x = axis[0].Replace("[", "").Replace(Environment.NewLine, "").Split(' ').Where(s => s != "").Select(f => float.Parse(f)).ToArray();
+            float[] y = axis[2].Replace("[", "").Replace(Environment.NewLine, "").Split(' ').Where(s => s != "").Select(f => float.Parse(f)).ToArray();
+            float[] z = axis[1].Replace("[", "").Replace(Environment.NewLine, "").Split(' ').Where(s => s != "").Select(f => float.Parse(f)).ToArray();
+            for (int i = 0; i < 17; i++)
+            {
+                points[i] = new Vector3(x[i], y[i], -z[i]);
+            }
+            for (int i = 0; i < 12; i++)
+            {
+                NormalizeBone[i] = (points[BoneJoint[i, 1]] - points[BoneJoint[i, 0]]).normalized;
+            }
+        }//.if
+    }//.PointUpdate_from_msg
+    
+    
+    
     void PointUpdateByTime()
     {
         Timer += Time.deltaTime;
         if (Timer > (1 / FrameRate))
         {
             Timer = 0;
-            PointUpdate();
+            PointUpdate_from_msg();
         }
     }
     Quaternion GetBoneRot(int jointNum)

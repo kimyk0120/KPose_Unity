@@ -158,7 +158,7 @@ public class WebSocket_Control : MonoBehaviour
                     cnntStat = 1;
                     throw;
                 }
-                yield return new WaitForSeconds(0.4f);
+                yield return new WaitForSeconds(0.35f);
             }
         }//.ImageSend
     }

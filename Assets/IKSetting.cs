@@ -8,6 +8,66 @@ using UnityEngine.Experimental.Rendering;
 using UnityEngine.UI;
 using WebSocketSharp.Server;
 
+//    허리 0
+//    오른발 1 ~ 3
+//    4-6 왼발
+//    7 척추
+//    8 가슴
+//    9 목 
+//    10 헤드
+//    11 ~ 13 왼팔
+//    14 ~ 16 오른팔
+//
+// 0 엉덩이 (꼬리뼈)
+// 1 오른쪽 엉덩이 (오른발 기지)
+// 2 오른쪽 무릎
+// 3 오른쪽 발목
+// 4 左尻 (왼발 관절)
+// 5 왼쪽 무릎
+// 6 왼쪽 발목
+// 7 척추
+// 8 가슴
+// 9 목 / 코
+// 10 머리
+// 11 왼쪽 어깨
+// 12 왼쪽 팔꿈치
+// 13 왼쪽 손목
+// 14 우견
+// 15 오른쪽 팔꿈치
+// 16 오른쪽 손목
+
+//    int[, ] joints = new int[, ] {
+// { 0, 1 }, = 엉덩이, 오른쪽 엉덩이 
+// { 1, 2 }, = 오른쪽 엉덩이, 오른쪽 무릎
+// { 2, 3 }, = 오른쪽 무릎, 오른쪽 발목
+// { 0, 4 }, = 엉덩이, 왼쪽 엉덩이 
+// { 4, 5 }, = 왼쪽 엉덩이 , 왼쪽 무릎
+// { 5, 6 }, = 왼쪽 무릎, 왼쪽 발목
+// { 0, 7 }, = 엉덩이, 척추
+// { 7, 8 }, = 척추, 가슴
+// { 8, 9 }, = 가슴, 목 / 코
+// { 9, 10 }, = 목 / 코, 머리
+// { 8, 11 }, = 가슴, 왼쪽 어깨
+// { 11, 12 }, = 왼쪽 어깨, 왼쪽 팔꿈치
+// { 12, 13 }, = 왼쪽 팔꿈치, 왼쪽 손목
+// { 8, 14 }, = 가슴 , 오른쪽 어깨
+// { 14, 15 }, = 오른쪽 어깨, 오른쪽 팔꿈치 
+// { 15, 16 } = 오른쪽 팔꿈치 , 오른쪽 손목};
+
+//    int[, ] BoneJoint = new int[, ] {
+// { 0, 2 }, = 엉덩이, 오른쪽 무릎
+// { 2, 3 }, = 오른쪽 무릎, 오른쪽 발목
+// { 0, 5 }, = 엉덩이, 왼쪽 무릎
+// { 5, 6 }, = 왼쪽 무릎, 왼쪽 발목
+// { 0, 9 }, = 엉덩이, 목 / 코
+// { 9, 10 }, = 목 / 코, 머리
+// { 9, 11 }, = 목 / 코 , 왼쪽 어깨
+// { 11, 12 }, = 왼쪽 어깨, 왼쪽 팔꿈치
+// { 12, 13 }, = 왼쪽 팔꿈치, 왼쪽 손목
+// { 9, 14 }, = 목 / 코, 오른쪽 어깨 
+// { 14, 15 }, = 오른쪽 어깨, 오른쪽 팔꿈치 
+// { 15, 16 } }; = 오른쪽 팔꿈치 , 오른쪽 손목
+
 public class IKSetting : MonoBehaviour
 {
     [SerializeField, Range(10, 120)] float FrameRate;
@@ -75,10 +135,15 @@ public class IKSetting : MonoBehaviour
             float[] x = axis[0].Replace("[", "").Replace(Environment.NewLine, "").Split(' ').Where(s => s != "").Select(f => float.Parse(f)).ToArray();
             float[] y = axis[2].Replace("[", "").Replace(Environment.NewLine, "").Split(' ').Where(s => s != "").Select(f => float.Parse(f)).ToArray();
             float[] z = axis[1].Replace("[", "").Replace(Environment.NewLine, "").Split(' ').Where(s => s != "").Select(f => float.Parse(f)).ToArray();
-            for (int i = 0; i < 17; i++)
+            
+            for (int i = 1; i < 17; i++)
             {
+                x[i] = x[i] - x[0];
+//                y[i] = y[i] - 389.17077f;
+                z[i] = z[i] - z[0];
                 points[i] = new Vector3(-x[i], y[i], -z[i]);
             }
+            points[0] = new Vector3(0, y[0], 0);
 
             for (int i = 0; i < 12; i++)
             {
@@ -98,6 +163,8 @@ public class IKSetting : MonoBehaviour
             NowFrame++;
             string all = fi.ReadToEnd();
             string[] axis = all.Split(']');
+            
+            // 17 points
             float[] x = axis[0].Replace("[", "").Replace(Environment.NewLine, "").Split(' ').Where(s => s != "").Select(f => float.Parse(f)).ToArray();
             float[] y = axis[2].Replace("[", "").Replace(Environment.NewLine, "").Split(' ').Where(s => s != "").Select(f => float.Parse(f)).ToArray();
             float[] z = axis[1].Replace("[", "").Replace(Environment.NewLine, "").Split(' ').Where(s => s != "").Select(f => float.Parse(f)).ToArray();
@@ -106,10 +173,21 @@ public class IKSetting : MonoBehaviour
             {
                 points[i] = new Vector3(-x[i], y[i], -z[i]);
             }
+            
+//            for (int i = 1; i < 17; i++)
+//            {
+//                x[i] = x[i] - x[0];
+//                y[i] = y[i] - y[0];
+//                z[i] = z[i] - z[0];
+//                points[i] = new Vector3(-x[i], y[i], -z[i]);
+//            }
+//            points[0] = new Vector3(0, y[0], 0);
+            
 
             for (int i = 0; i < 12; i++)
             {
                 NormalizeBone[i] = (points[BoneJoint[i, 1]] - points[BoneJoint[i, 0]]).normalized;
+//                Debug.Log(NormalizeBone[i]);
             }
         }
     }//.PointUpdate
@@ -133,6 +211,8 @@ public class IKSetting : MonoBehaviour
             }
         }
     }
+
+//    private float test = 0.0f;
     void IKSet()
     {
 //        Debug.Log(Math.Abs(points[0].x));
@@ -141,15 +221,19 @@ public class IKSetting : MonoBehaviour
         if (Math.Abs(points[0].x) < 1000 && Math.Abs(points[0].y) < 1000 && Math.Abs(points[0].z) < 1000)
         {
             
-//            BoneList[0].position = Vector3.Lerp(BoneList[0].position, points[0] * 0.001f + Vector3.up * 0.8f, 0.1f);
-//            FullbodyIK.transform.position = Vector3.Lerp(FullbodyIK.transform.position, points[0] * 0.001f, 0.01f);
-//            Vector3 hipRot = (NormalizeBone[0] + NormalizeBone[2] + NormalizeBone[4]).normalized;
-//            FullbodyIK.transform.forward = Vector3.Lerp(FullbodyIK.transform.forward, new Vector3(hipRot.x, 0, hipRot.z), 0.1f);
-
-            BoneList[0].position = Vector3.Lerp(BoneList[0].position, points[0] * 0.001f + Vector3.up * 0.8f, 1.0f);
-            FullbodyIK.transform.position = Vector3.Lerp(FullbodyIK.transform.position, points[0] * 0.001f, 1.0f);
+            //NormalizeBone[0] = 엉덩이.position - 오른쪽 무릎.position
+            //NormalizeBone[2] = 엉덩이.position - 왼쪽 무릎.position
+            //NormalizeBone[4] = 엉덩이.position - 목 / 코.position
+            
+            BoneList[0].position = Vector3.Lerp(BoneList[0].position, points[0] * 0.001f + Vector3.up * 0.8f, 0.1f);
+            FullbodyIK.transform.position = Vector3.Lerp(FullbodyIK.transform.position, points[0] * 0.001f, 0.01f);
             Vector3 hipRot = (NormalizeBone[0] + NormalizeBone[2] + NormalizeBone[4]).normalized;
-            FullbodyIK.transform.forward = Vector3.Lerp(FullbodyIK.transform.forward, new Vector3(hipRot.x, 0, hipRot.z), 1.0f);
+            
+//            Debug.Log(hipRot.x);
+//            Debug.Log(hipRot.y);
+//            Debug.Log(hipRot.z);
+            
+            FullbodyIK.transform.forward = Vector3.Lerp(FullbodyIK.transform.forward, new Vector3(hipRot.x, 0, hipRot.z), 0.3f);
             
         }
         for (int i = 0; i < 12; i++)
