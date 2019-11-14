@@ -6,6 +6,33 @@ TagManager:
   tags:
   - Webcam
   - Button
+  - CHAN
+  - Hips-chan
+  - RightKnee-chan
+  - RightFoot-chan
+  - LeftKnee-chan
+  - LeftFoot-chan
+  - Neck-chan
+  - Head-chan
+  - LeftArm-chan
+  - LeftElbow-chan
+  - LeftWrist-chan
+  - RightArm-chan
+  - RightElbow-chan
+  - RightWrist-chan
+  - Hips-cow
+  - RightKnee-cow
+  - RightFoot-cow
+  - LeftKnee-cow
+  - LeftFoot-cow
+  - Neck-cow
+  - Head-cow
+  - LeftArm-cow
+  - LeftElbow-cow
+  - LeftWrist-cow
+  - RightArm-cow
+  - RightElbow-cow
+  - RightWrist-cow
   layers:
   - Default
   - TransparentFX

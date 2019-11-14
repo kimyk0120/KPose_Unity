@@ -68,6 +68,13 @@ using WebSocketSharp.Server;
 // { 14, 15 }, = 오른쪽 어깨, 오른쪽 팔꿈치 
 // { 15, 16 } }; = 오른쪽 팔꿈치 , 오른쪽 손목
 
+// Editor 이동 가능 Obj?
+//    Hips 0
+//    LeftWrist 13
+//    RightWrist 16
+//    LeftFoot 6
+//    RightFoot 3
+
 public class IKSetting : MonoBehaviour
 {
     [SerializeField, Range(10, 120)] float FrameRate;
@@ -98,8 +105,9 @@ public class IKSetting : MonoBehaviour
         {
             Timer = 0;
 //            PointUpdate();
-            PointUpdate_from_msg();
+            PointUpdate_from_msg();    
         }
+        
         if (!FullbodyIK)
         {
             IKFind();
@@ -123,6 +131,7 @@ public class IKSetting : MonoBehaviour
         
         if (oldMsg.Equals(newMsg)){
             msg = "";
+            return;
         }
         else{
             oldMsg = newMsg;
@@ -195,11 +204,16 @@ public class IKSetting : MonoBehaviour
     void IKFind()
     {
         FullbodyIK = GameObject.Find("FullBodyIK");
+        //FullbodyIK = transform.Find("FullBodyIK").gameObject;
+        
         if (FullbodyIK)
         {
             for (int i = 0; i < Enum.GetNames(typeof(OpenPoseRef)).Length; i++)
             {
+                
                 Transform obj = GameObject.Find(Enum.GetName(typeof(OpenPoseRef), i)).transform;
+                //Transform obj = GameObject.FindWithTag(Enum.GetName(typeof(OpenPoseRef), i)+"-chan").transform;
+                
                 if (obj)
                 {
                     BoneList.Add(obj);

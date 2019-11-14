@@ -2168,6 +2168,7 @@
             <e p="FullBodyIKUnityChanBehaviour.cs" t="Include" />
           </e>
         </e>
+        <e p="IKSetCowboy.cs" t="Include" />
         <e p="IKSetting.cs" t="Include" />
         <e p="Plugins" t="Include">
           <e p="WebSocket.cs" t="Include" />

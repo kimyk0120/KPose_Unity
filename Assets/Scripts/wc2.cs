@@ -22,7 +22,7 @@ public class wc2 : MonoBehaviour
 //        GetComponent<MeshRenderer>().material.mainTexture = web;
 //        web.Play();
 //        RectTransform rectTransform = gameObject.GetComponent<RectTransform>();
-        web = new WebCamTexture(640,480,30);
+        web = new WebCamTexture(640,480,10);
         rawimage.texture = web;
 //        rawimage.material.mainTexture = webcamTexture;
         web.Play();
