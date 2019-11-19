@@ -145,14 +145,19 @@ public class IKSetting : MonoBehaviour
             float[] y = axis[2].Replace("[", "").Replace(Environment.NewLine, "").Split(' ').Where(s => s != "").Select(f => float.Parse(f)).ToArray();
             float[] z = axis[1].Replace("[", "").Replace(Environment.NewLine, "").Split(' ').Where(s => s != "").Select(f => float.Parse(f)).ToArray();
             
-            for (int i = 1; i < 17; i++)
+            for (int i = 0; i < 17; i++)
             {
-                x[i] = x[i] - x[0];
-//                y[i] = y[i] - 389.17077f;
-                z[i] = z[i] - z[0];
                 points[i] = new Vector3(-x[i], y[i], -z[i]);
             }
-            points[0] = new Vector3(0, y[0], 0);
+            
+//            for (int i = 1; i < 17; i++)
+//            {
+//                x[i] = x[i] - x[0];
+////                y[i] = y[i] - 389.17077f;
+//                z[i] = z[i] - z[0];
+//                points[i] = new Vector3(-x[i], y[i], -z[i]);
+//            }
+//            points[0] = new Vector3(0, y[0], 0);
 
             for (int i = 0; i < 12; i++)
             {
@@ -235,21 +240,20 @@ public class IKSetting : MonoBehaviour
         if (Math.Abs(points[0].x) < 1000 && Math.Abs(points[0].y) < 1000 && Math.Abs(points[0].z) < 1000)
         {
             
-            //NormalizeBone[0] = 엉덩이.position - 오른쪽 무릎.position
-            //NormalizeBone[2] = 엉덩이.position - 왼쪽 무릎.position
-            //NormalizeBone[4] = 엉덩이.position - 목 / 코.position
-            
             BoneList[0].position = Vector3.Lerp(BoneList[0].position, points[0] * 0.001f + Vector3.up * 0.8f, 0.1f);
-            FullbodyIK.transform.position = Vector3.Lerp(FullbodyIK.transform.position, points[0] * 0.001f, 0.01f);
-            Vector3 hipRot = (NormalizeBone[0] + NormalizeBone[2] + NormalizeBone[4]).normalized;
+            FullbodyIK.transform.position = Vector3.Lerp(FullbodyIK.transform.position, points[0] * 0.001f, 0.1f);
+//            Vector3 hipRot = (NormalizeBone[0] + NormalizeBone[2] + NormalizeBone[4]).normalized;
+//            FullbodyIK.transform.forward = Vector3.Lerp(FullbodyIK.transform.forward, new Vector3(hipRot.x, 0, hipRot.z), 0.3f);
             
-//            Debug.Log(hipRot.x);
-//            Debug.Log(hipRot.y);
-//            Debug.Log(hipRot.z);
-            
+            Vector3 hipRot = -(NormalizeBone[0] + NormalizeBone[2] + NormalizeBone[5]).normalized;
             FullbodyIK.transform.forward = Vector3.Lerp(FullbodyIK.transform.forward, new Vector3(hipRot.x, 0, hipRot.z), 0.3f);
             
         }
+        else
+        {
+            FullbodyIK.transform.forward = Vector3.Lerp(FullbodyIK.transform.forward, new Vector3(0, 0, 0), 0.3f);
+        }
+
         for (int i = 0; i < 12; i++)
         {
 //            BoneList[NormalizeJoint[i, 1]].position = Vector3.Lerp(
@@ -259,7 +263,7 @@ public class IKSetting : MonoBehaviour
             
             BoneList[NormalizeJoint[i, 1]].position = Vector3.Lerp(
                 BoneList[NormalizeJoint[i, 1]].position,
-                BoneList[NormalizeJoint[i, 0]].position + BoneDistance[i] * NormalizeBone[i], 1.0f
+                BoneList[NormalizeJoint[i, 0]].position + BoneDistance[i] * NormalizeBone[i], .35f
             );
             
             DrawLine(BoneList[NormalizeJoint[i, 0]].position + Vector3.right, BoneList[NormalizeJoint[i, 1]].position + Vector3.right, Color.red);
@@ -305,3 +309,4 @@ enum NormalizeBoneRef
     LeftArm2LeftElbow,
     LeftElbow2LeftWrist
 };
+
