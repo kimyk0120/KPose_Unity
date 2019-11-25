@@ -22,5 +22,15 @@ public class UiScript : MonoBehaviour
             a.GetComponent<Image>().color = Color.white; 
         }
     }
-    
+
+    public void QuitGo()
+    {
+        Debug.Log("Quit");
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #else
+            Application.Quit();
+        #endif
+    }
+
 }

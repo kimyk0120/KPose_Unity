@@ -172,8 +172,10 @@ public class IKSetting : MonoBehaviour
         if (NowFrame < Data_Size)
         {
 //            Debug.Log("test : " +NowFrame.ToString());
-//            fi = new StreamReader(Application.dataPath + Data_Path + File_Name + NowFrame.ToString() + ".txt");
-            fi = new StreamReader(Application.dataPath + Data_Path + File_Name + ".txt");
+            if (NowFrame == 0) NowFrame = 1;
+//            Debug.Log("NowFrame : " + NowFrame );
+            fi = new StreamReader(Application.dataPath + Data_Path + File_Name + NowFrame.ToString() + ".txt");
+//            fi = new StreamReader(Application.dataPath + Data_Path + File_Name + ".txt");
             NowFrame++;
             string all = fi.ReadToEnd();
             string[] axis = all.Split(']');
@@ -240,19 +242,17 @@ public class IKSetting : MonoBehaviour
         if (Math.Abs(points[0].x) < 1000 && Math.Abs(points[0].y) < 1000 && Math.Abs(points[0].z) < 1000)
         {
             
+//            BoneList[0].position = Vector3.Lerp(BoneList[0].position, 0.8f * 0.001f  * points[0], 0.1f);
             BoneList[0].position = Vector3.Lerp(BoneList[0].position, points[0] * 0.001f + Vector3.up * 0.8f, 0.1f);
             FullbodyIK.transform.position = Vector3.Lerp(FullbodyIK.transform.position, points[0] * 0.001f, 0.1f);
 //            Vector3 hipRot = (NormalizeBone[0] + NormalizeBone[2] + NormalizeBone[4]).normalized;
 //            FullbodyIK.transform.forward = Vector3.Lerp(FullbodyIK.transform.forward, new Vector3(hipRot.x, 0, hipRot.z), 0.3f);
-            
+
             Vector3 hipRot = -(NormalizeBone[0] + NormalizeBone[2] + NormalizeBone[5]).normalized;
             FullbodyIK.transform.forward = Vector3.Lerp(FullbodyIK.transform.forward, new Vector3(hipRot.x, 0, hipRot.z), 0.3f);
             
         }
-        else
-        {
-            FullbodyIK.transform.forward = Vector3.Lerp(FullbodyIK.transform.forward, new Vector3(0, 0, 0), 0.3f);
-        }
+        
 
         for (int i = 0; i < 12; i++)
         {
@@ -265,6 +265,7 @@ public class IKSetting : MonoBehaviour
                 BoneList[NormalizeJoint[i, 1]].position,
                 BoneList[NormalizeJoint[i, 0]].position + BoneDistance[i] * NormalizeBone[i], .35f
             );
+            
             
             DrawLine(BoneList[NormalizeJoint[i, 0]].position + Vector3.right, BoneList[NormalizeJoint[i, 1]].position + Vector3.right, Color.red);
         }
