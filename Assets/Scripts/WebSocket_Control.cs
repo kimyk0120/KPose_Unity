@@ -22,6 +22,7 @@ public class WebSocket_Control : MonoBehaviour
     private UiScript uiScript;
     private int cnntStat;
     
+    
     void Awake ()
     {
         uiScript = new UiScript();
@@ -34,6 +35,7 @@ public class WebSocket_Control : MonoBehaviour
         {
             StopBtnOn();
         }
+        
     }
 
     public string GetResturnMsg()

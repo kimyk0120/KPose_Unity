@@ -26,7 +26,8 @@ public class SphereSpawner : MonoBehaviour
         {
             timeAfterSpawn = 0f;
             int a = Random.Range(0, 3);
-            GameObject sp = Instantiate(spPrefab[a], new Vector3(Random.Range(-.3f,.3f), 5, Random.Range(-.3f,.3f)) , transform.rotation);
+            GameObject sp = Instantiate(spPrefab[a], 
+                new Vector3(Random.Range(-1f,1f), 4, Random.Range(-.3f,.3f)) , transform.rotation);
             sp.transform.LookAt(target);
             spawnRate = Random.Range(spawnRateMin, spawnRateMax);
         }

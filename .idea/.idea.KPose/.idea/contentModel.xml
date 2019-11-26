@@ -6834,10 +6834,17 @@
         </e>
         <e p="IKSetCowboy.cs" t="Include" />
         <e p="IKSetting.cs" t="Include" />
+        <e p="Knight" t="Include">
+          <e p="Scripts" t="Include">
+            <e p="rotator.cs" t="Include" />
+          </e>
+          <e p="shaders" t="Include">
+            <e p="doublesidedshader.shader" t="Include" />
+          </e>
+        </e>
         <e p="Plugins" t="Include">
           <e p="WebSocket.cs" t="Include" />
         </e>
-        <e p="rigi.cs" t="Include" />
         <e p="Scripts" t="Include">
           <e p="Console.cs" t="Include" />
           <e p="FullBodyIK" t="Include">
