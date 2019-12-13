@@ -21,7 +21,7 @@ public class WebSocket_Control : MonoBehaviour
     private string returnMsg;
     private UiScript uiScript;
     private int cnntStat;
-    
+    public GameObject player;
     
     void Awake ()
     {
@@ -35,7 +35,18 @@ public class WebSocket_Control : MonoBehaviour
         {
             StopBtnOn();
         }
-        
+
+        // ReSharper disable once SuspiciousTypeConversion.Global
+        if (ws!=null&&ws.GetState().ToString()=="Open")
+        {
+            GameObject inpurpanel = GameObject.FindGameObjectWithTag("inputPanel");
+            if(inpurpanel!=null&&inpurpanel.activeSelf==true) inpurpanel.SetActive(false);
+            if(player.activeSelf==false) player.SetActive(true);
+        }
+        else
+        {
+            if(player!=null&&player.activeSelf==true) player.SetActive(false);
+        }
     }
 
     public string GetResturnMsg()
@@ -118,7 +129,7 @@ public class WebSocket_Control : MonoBehaviour
         StopCoroutine(ImageSend);
         uiScript.ColorChg_white();
         cnntStat = 0;
-        ws.Close();
+        ws?.Close();
     }
     
     private void weOnMessage(){
@@ -152,7 +163,7 @@ public class WebSocket_Control : MonoBehaviour
 //                System.Convert.ToBase64String(b);
                 try
                 {
-                    Debug.Log("send");
+                    //Debug.Log("send");
                     ws.Send(b);
                 }
                 catch (Exception e)
@@ -171,9 +182,26 @@ public class WebSocket_Control : MonoBehaviour
         ws.Send(b);
         Debug.Log("send one");
     }
-
-   
     
+    public void GetAddress(Text addressText)
+    {
+        var inputtext = addressText.GetComponent<Text>().text;
+        if (inputtext == null || inputtext.Equals("")) return;
+        Debug.Log(inputtext);
+        this.socket_adress = inputtext;
+        try
+        {
+            WSConnect();
+        }
+        catch (Exception e)
+        {
+            Debug.Log("Connect Failed..");
+            var messageObj = GameObject.FindGameObjectWithTag("MessageText");
+            messageObj.GetComponent<Text>().text = "Connection Failed.."; 
+            System.Console.WriteLine(e);
+            throw;
+        }
+    }
 
 }//.class
 
@@ -190,3 +218,5 @@ public class ReqJson
         Image = image;        
     }
 }
+
+

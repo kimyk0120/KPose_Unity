@@ -11,7 +11,8 @@ public class wc2 : MonoBehaviour
     private WebCamTexture web;
     public RawImage rawimage;
     private byte[] image_bytes;
-
+    float Timer;
+    private float FrameRate = 10;
     public byte[] GetImgBytes() { return image_bytes; }
     public void SetImageBytes(byte[] bytes) { this.image_bytes = bytes; }
 
@@ -36,7 +37,12 @@ public class wc2 : MonoBehaviour
 
     void LateUpdate()
     {
-        SaveImage();
+        Timer += Time.deltaTime;
+        if (Timer > (1 / FrameRate))
+        {
+            Timer = 0;
+            SaveImage();
+        }
     }
     
     public void SaveImage(){

@@ -33,6 +33,10 @@ TagManager:
   - RightArm-cow
   - RightElbow-cow
   - RightWrist-cow
+  - inputPanel
+  - addressPlaceholder
+  - MessageText
+  - addressText
   layers:
   - Default
   - TransparentFX
@@ -44,7 +48,7 @@ TagManager:
   - 
   - PostProcessing
   - WebCam
-  - 
+  - inputpop
   - 
   - 
   - 
@@ -69,4 +73,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: inputpop
+    uniqueID: 912728789
     locked: 0
