@@ -186,9 +186,15 @@ public class WebSocket_Control : MonoBehaviour
     public void GetAddress(Text addressText)
     {
         var inputtext = addressText.GetComponent<Text>().text;
-        if (inputtext == null || inputtext.Equals("")) return;
+        if (inputtext == null || inputtext.Equals(""))
+        {
+            this.socket_adress = GameObject.FindGameObjectWithTag("addressPlaceholder").GetComponent<Text>().text;
+        }
+        else
+        {
+            this.socket_adress = inputtext;    
+        }
         Debug.Log(inputtext);
-        this.socket_adress = inputtext;
         try
         {
             WSConnect();
