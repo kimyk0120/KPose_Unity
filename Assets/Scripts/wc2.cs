@@ -12,7 +12,7 @@ public class wc2 : MonoBehaviour
     public RawImage rawimage;
     private byte[] image_bytes;
     float Timer;
-    private float FrameRate = 10;
+    private float FrameRate = 5;
     public byte[] GetImgBytes() { return image_bytes; }
     public void SetImageBytes(byte[] bytes) { this.image_bytes = bytes; }
 
