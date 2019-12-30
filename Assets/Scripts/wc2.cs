@@ -12,7 +12,7 @@ public class wc2 : MonoBehaviour
     public RawImage rawimage;
     private byte[] image_bytes;
     float Timer;
-    private float FrameRate = 5;
+    private float FrameRate = 20;
     public byte[] GetImgBytes() { return image_bytes; }
     public void SetImageBytes(byte[] bytes) { this.image_bytes = bytes; }
 
@@ -23,7 +23,7 @@ public class wc2 : MonoBehaviour
 //        GetComponent<MeshRenderer>().material.mainTexture = web;
 //        web.Play();
 //        RectTransform rectTransform = gameObject.GetComponent<RectTransform>();
-        web = new WebCamTexture(640,480,10);
+        web = new WebCamTexture(640,480,20);
         rawimage.texture = web;
 //        rawimage.material.mainTexture = webcamTexture;
         web.Play();
