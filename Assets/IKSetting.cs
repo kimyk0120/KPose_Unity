@@ -247,7 +247,8 @@ public class IKSetting : MonoBehaviour
         {
             
 //            BoneList[0].position = Vector3.Lerp(BoneList[0].position, 0.8f * 0.001f  * points[0], 0.1f);
-            BoneList[0].position = Vector3.Lerp(BoneList[0].position, points[0] * 0.001f + Vector3.up * 0.8f, 0.1f);
+            //BoneList[0].position = Vector3.Lerp(BoneList[0].position, points[0] * 0.001f + Vector3.up * 0.8f, 0.1f);
+            BoneList[0].position = Vector3.Lerp(BoneList[0].position, points[0] * 0.001f + Vector3.up * 0.8f, 0.9f);
             FullbodyIK.transform.position = Vector3.Lerp(FullbodyIK.transform.position, points[0] * 0.001f, 0.1f);
 //            Vector3 hipRot = (NormalizeBone[0] + NormalizeBone[2] + NormalizeBone[4]).normalized;
 //            FullbodyIK.transform.forward = Vector3.Lerp(FullbodyIK.transform.forward, new Vector3(hipRot.x, 0, hipRot.z), 0.3f);
@@ -267,7 +268,8 @@ public class IKSetting : MonoBehaviour
             
             BoneList[NormalizeJoint[i, 1]].position = Vector3.Lerp(
                 BoneList[NormalizeJoint[i, 1]].position,
-                BoneList[NormalizeJoint[i, 0]].position + BoneDistance[i] * NormalizeBone[i], .35f
+                //BoneList[NormalizeJoint[i, 0]].position + BoneDistance[i] * NormalizeBone[i], .35f
+                BoneList[NormalizeJoint[i, 0]].position + BoneDistance[i] * NormalizeBone[i], 0.5f
             );
             
             
@@ -275,7 +277,8 @@ public class IKSetting : MonoBehaviour
         }
         for (int i = 0; i < joints.Length / 2; i++)
         {
-            DrawLine(points[joints[i, 0]] * 0.001f + new Vector3(-1, 0.8f, 0), points[joints[i, 1]] * 0.001f + new Vector3(-1, 0.8f, 0), Color.blue);
+            //DrawLine(points[joints[i, 0]] * 0.001f + new Vector3(-1, 0.8f, 0), points[joints[i, 1]] * 0.001f + new Vector3(-1, 0.8f, 0), Color.blue);
+            DrawLine(points[joints[i, 0]] * 0.008f + new Vector3(-0.5f, 0.2f, 0), points[joints[i, 1]] * 0.008f + new Vector3(-0.5f, 0.2f, 0), Color.blue);
         }
     }
     void DrawLine(Vector3 s, Vector3 e, Color c)
@@ -285,13 +288,34 @@ public class IKSetting : MonoBehaviour
 }
 enum OpenPoseRef
 {
+    // Hips,
+    // RightKnee,
+    // RightFoot,
+    // LeftKnee,
+    // LeftFoot,
+    // Neck,
+    // Head,
+    // LeftArm,
+    // LeftElbow,
+    // LeftWrist,
+    // RightArm,
+    // RightElbow,
+    // RightWrist,
+    
     Hips,
-    RightKnee,
-    RightFoot,
+
+    //RightKnee,
+    //RightFoot,
+    //LeftKnee,
+    //LeftFoot,
     LeftKnee,
     LeftFoot,
+    RightKnee,
+    RightFoot,
+
     Neck,
     Head,
+
     LeftArm,
     LeftElbow,
     LeftWrist,
