@@ -1,0 +1,247 @@
+fileFormatVersion: 2
+guid: bdd12660fed394f6b85fcb92baa30aaf
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Camera
+    100002: Camera 1
+    100004: Camera 2
+    100006: Camera 3
+    100008: Camera 4
+    100010: Camera 5
+    100012: Camera 6
+    100014: Camera 7
+    100016: MeshNode
+    100018: //RootNode
+    100020: unknown-retargeted:Bip001
+    100022: unknown-retargeted:Bip001 Head
+    100024: unknown-retargeted:Bip001 L Calf
+    100026: unknown-retargeted:Bip001 L Clavicle
+    100028: unknown-retargeted:Bip001 L Finger0
+    100030: unknown-retargeted:Bip001 L Finger01
+    100032: unknown-retargeted:Bip001 L Finger02
+    100034: unknown-retargeted:Bip001 L Finger1
+    100036: unknown-retargeted:Bip001 L Finger11
+    100038: unknown-retargeted:Bip001 L Finger12
+    100040: unknown-retargeted:Bip001 L Finger2
+    100042: unknown-retargeted:Bip001 L Finger21
+    100044: unknown-retargeted:Bip001 L Finger22
+    100046: unknown-retargeted:Bip001 L Finger3
+    100048: unknown-retargeted:Bip001 L Finger31
+    100050: unknown-retargeted:Bip001 L Finger32
+    100052: unknown-retargeted:Bip001 L Finger4
+    100054: unknown-retargeted:Bip001 L Finger41
+    100056: unknown-retargeted:Bip001 L Finger42
+    100058: unknown-retargeted:Bip001 L Foot
+    100060: unknown-retargeted:Bip001 L Forearm
+    100062: unknown-retargeted:Bip001 L Forearm_tw
+    100064: unknown-retargeted:Bip001 L Hand
+    100066: unknown-retargeted:Bip001 L Thigh
+    100068: unknown-retargeted:Bip001 L Thigh_tw
+    100070: unknown-retargeted:Bip001 L Toe0
+    100072: unknown-retargeted:Bip001 L UpperArm
+    100074: unknown-retargeted:Bip001 L UpperArm_tw
+    100076: unknown-retargeted:Bip001 Neck
+    100078: unknown-retargeted:Bip001 Neck1
+    100080: unknown-retargeted:Bip001 Pelvis
+    100082: unknown-retargeted:Bip001 R Calf
+    100084: unknown-retargeted:Bip001 R Clavicle
+    100086: unknown-retargeted:Bip001 R Finger0
+    100088: unknown-retargeted:Bip001 R Finger01
+    100090: unknown-retargeted:Bip001 R Finger02
+    100092: unknown-retargeted:Bip001 R Finger1
+    100094: unknown-retargeted:Bip001 R Finger11
+    100096: unknown-retargeted:Bip001 R Finger12
+    100098: unknown-retargeted:Bip001 R Finger2
+    100100: unknown-retargeted:Bip001 R Finger21
+    100102: unknown-retargeted:Bip001 R Finger22
+    100104: unknown-retargeted:Bip001 R Finger3
+    100106: unknown-retargeted:Bip001 R Finger31
+    100108: unknown-retargeted:Bip001 R Finger32
+    100110: unknown-retargeted:Bip001 R Finger4
+    100112: unknown-retargeted:Bip001 R Finger41
+    100114: unknown-retargeted:Bip001 R Finger42
+    100116: unknown-retargeted:Bip001 R Foot
+    100118: unknown-retargeted:Bip001 R Forearm
+    100120: unknown-retargeted:Bip001 R Forearm_tw
+    100122: unknown-retargeted:Bip001 R Hand
+    100124: unknown-retargeted:Bip001 R Thigh
+    100126: unknown-retargeted:Bip001 R Thigh_tw
+    100128: unknown-retargeted:Bip001 R Toe0
+    100130: unknown-retargeted:Bip001 R UpperArm
+    100132: unknown-retargeted:Bip001 R UpperArm_tw
+    100134: unknown-retargeted:Bip001 Spine
+    100136: unknown-retargeted:Bip001 Spine1
+    100138: unknown-retargeted:Bip001 Spine2
+    100140: unknown-retargeted:Bip001 Spine3
+    400000: Camera
+    400002: Camera 1
+    400004: Camera 2
+    400006: Camera 3
+    400008: Camera 4
+    400010: Camera 5
+    400012: Camera 6
+    400014: Camera 7
+    400016: MeshNode
+    400018: //RootNode
+    400020: unknown-retargeted:Bip001
+    400022: unknown-retargeted:Bip001 Head
+    400024: unknown-retargeted:Bip001 L Calf
+    400026: unknown-retargeted:Bip001 L Clavicle
+    400028: unknown-retargeted:Bip001 L Finger0
+    400030: unknown-retargeted:Bip001 L Finger01
+    400032: unknown-retargeted:Bip001 L Finger02
+    400034: unknown-retargeted:Bip001 L Finger1
+    400036: unknown-retargeted:Bip001 L Finger11
+    400038: unknown-retargeted:Bip001 L Finger12
+    400040: unknown-retargeted:Bip001 L Finger2
+    400042: unknown-retargeted:Bip001 L Finger21
+    400044: unknown-retargeted:Bip001 L Finger22
+    400046: unknown-retargeted:Bip001 L Finger3
+    400048: unknown-retargeted:Bip001 L Finger31
+    400050: unknown-retargeted:Bip001 L Finger32
+    400052: unknown-retargeted:Bip001 L Finger4
+    400054: unknown-retargeted:Bip001 L Finger41
+    400056: unknown-retargeted:Bip001 L Finger42
+    400058: unknown-retargeted:Bip001 L Foot
+    400060: unknown-retargeted:Bip001 L Forearm
+    400062: unknown-retargeted:Bip001 L Forearm_tw
+    400064: unknown-retargeted:Bip001 L Hand
+    400066: unknown-retargeted:Bip001 L Thigh
+    400068: unknown-retargeted:Bip001 L Thigh_tw
+    400070: unknown-retargeted:Bip001 L Toe0
+    400072: unknown-retargeted:Bip001 L UpperArm
+    400074: unknown-retargeted:Bip001 L UpperArm_tw
+    400076: unknown-retargeted:Bip001 Neck
+    400078: unknown-retargeted:Bip001 Neck1
+    400080: unknown-retargeted:Bip001 Pelvis
+    400082: unknown-retargeted:Bip001 R Calf
+    400084: unknown-retargeted:Bip001 R Clavicle
+    400086: unknown-retargeted:Bip001 R Finger0
+    400088: unknown-retargeted:Bip001 R Finger01
+    400090: unknown-retargeted:Bip001 R Finger02
+    400092: unknown-retargeted:Bip001 R Finger1
+    400094: unknown-retargeted:Bip001 R Finger11
+    400096: unknown-retargeted:Bip001 R Finger12
+    400098: unknown-retargeted:Bip001 R Finger2
+    400100: unknown-retargeted:Bip001 R Finger21
+    400102: unknown-retargeted:Bip001 R Finger22
+    400104: unknown-retargeted:Bip001 R Finger3
+    400106: unknown-retargeted:Bip001 R Finger31
+    400108: unknown-retargeted:Bip001 R Finger32
+    400110: unknown-retargeted:Bip001 R Finger4
+    400112: unknown-retargeted:Bip001 R Finger41
+    400114: unknown-retargeted:Bip001 R Finger42
+    400116: unknown-retargeted:Bip001 R Foot
+    400118: unknown-retargeted:Bip001 R Forearm
+    400120: unknown-retargeted:Bip001 R Forearm_tw
+    400122: unknown-retargeted:Bip001 R Hand
+    400124: unknown-retargeted:Bip001 R Thigh
+    400126: unknown-retargeted:Bip001 R Thigh_tw
+    400128: unknown-retargeted:Bip001 R Toe0
+    400130: unknown-retargeted:Bip001 R UpperArm
+    400132: unknown-retargeted:Bip001 R UpperArm_tw
+    400134: unknown-retargeted:Bip001 Spine
+    400136: unknown-retargeted:Bip001 Spine1
+    400138: unknown-retargeted:Bip001 Spine2
+    400140: unknown-retargeted:Bip001 Spine3
+    2000000: Camera
+    2000002: Camera 1
+    2000004: Camera 2
+    2000006: Camera 3
+    2000008: Camera 4
+    2000010: Camera 5
+    2000012: Camera 6
+    2000014: Camera 7
+    2100000: No Name
+    4300000: MeshNode
+    7400000: C:/Users/kihyu/Desktop/captury_2.0.4_Project/take_01
+    9500000: //RootNode
+    13700000: MeshNode
+    2186277476908879412: ImportLogs
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.001
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
